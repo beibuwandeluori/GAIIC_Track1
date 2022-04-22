@@ -1,0 +1,27 @@
+model:
+  type: VisualBert
+  model_name: hfl/chinese-roberta-wwm-ext  # hfl/chinese-roberta-wwm-ext bert-base-chinese
+  num_classes: 2
+  drop_rate: 0.5
+  use_clf_head: false
+#  load_from: /data1/chenby/py_project/GAIIC_Track1/output/text/weights/bert-base-chinese/fold0/17_acc0.9590.pth
+loss: 
+  type: CrossEntropyLoss
+data:
+  type: TagData
+  fold: 0
+  batch_size: 1024  # 256
+  model_name: hfl/chinese-roberta-wwm-ext  # hfl/chinese-roberta-wwm-ext
+  neg_ratio: 0.5 # 生成训练负样本概率
+  extend_ratio: 1.0 # 扩展验证负样本概率
+  max_length: 8
+train:
+  learning_rate: 0.0001
+  num_epochs: 50
+  weight_decay: 0.01
+  swa: false
+  type: adam
+metric:
+  type: binary_accuracy
+name: tag
+version: baseline

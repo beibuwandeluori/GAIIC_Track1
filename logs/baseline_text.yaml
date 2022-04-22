@@ -1,0 +1,27 @@
+model:
+  type: VisualBert
+  model_name: hfl/chinese-roberta-wwm-ext  # hfl/chinese-roberta-wwm-ext bert-base-chinese
+  num_classes: 2
+  drop_rate: 0.5
+  use_clf_head: false
+loss: 
+  type: CrossEntropyLoss
+data:
+  type: TextData
+  fold: 0
+  batch_size: 512  # 256
+  model_name: hfl/chinese-roberta-wwm-ext  # hfl/chinese-roberta-wwm-ext bert-base-chinese
+  neg_ratio: 0.5 # 生成训练负样本概率
+  shuffle_ratio: 0 # 随机文本打乱概率
+  extend_ratio: 1.0 # 扩展验证负样本概率
+  max_length: 64
+train:
+  learning_rate: 0.0001  # 0.0001
+  num_epochs: 20
+  weight_decay: 0.01
+  swa: false
+  type: adam
+metric:
+  type: binary_accuracy
+name: text
+version: baseline
